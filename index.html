@@ -696,8 +696,21 @@
                 if (e.key === 'Escape' && !navMenu.classList.contains('hidden')) {
                     navMenu.classList.add('hidden');
                     toggleBtn.setAttribute('aria-expanded', 'false');
+                    const icon = toggleBtn.querySelector('i');
+                    if (icon) icon.className = 'fas fa-bars';
                     toggleBtn.focus();
                 }
+            });
+
+            // Close mobile menu when clicking on navigation links
+            const navLinks = navMenu.querySelectorAll('a[href^="#"]');
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    navMenu.classList.add('hidden');
+                    toggleBtn.setAttribute('aria-expanded', 'false');
+                    const icon = toggleBtn.querySelector('i');
+                    if (icon) icon.className = 'fas fa-bars';
+                });
             });
         }
 
@@ -734,7 +747,11 @@
                     // Close mobile menu if open
                     if (navMenu && !navMenu.classList.contains('hidden')) {
                         navMenu.classList.add('hidden');
-                        if (toggleBtn) toggleBtn.setAttribute('aria-expanded', 'false');
+                        if (toggleBtn) {
+                            toggleBtn.setAttribute('aria-expanded', 'false');
+                            const icon = toggleBtn.querySelector('i');
+                            if (icon) icon.className = 'fas fa-bars';
+                        }
                     }
                     
                     target.scrollIntoView({
